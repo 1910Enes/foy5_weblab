@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #e9f7f4;
+            font-family: 'Arial', sans-serif;
+        }
+        .card {
+            border: 2px solid #2d6a4f;
+            border-radius: 10px;
+            background-color: #ffffff;
+        }
+        .card-header {
+            background-color: #3c763d;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 1.5rem;
+        }
+        .card-body {
+            padding: 30px;
+        }
+        .form-label {
+            font-weight: bold;
+            color: #2d6a4f;
+        }
+        .form-control {
+            border: 2px solid #2d6a4f;
+            border-radius: 5px;
+            background-color: #f7f7f7;
+            color: #3a5a40;
+        }
+        .form-control:focus {
+            border-color: #1e5030;
+            box-shadow: 0 0 5px rgba(0, 123, 255, .25);
+        }
+        .btn-success {
+            background-color: #4CAF50;
+            border-color: #4CAF50;
+        }
+        .btn-danger {
+            background-color: #d9534f;
+            border-color: #d9534f;
+        }
+        .btn-success:hover {
+            background-color: #45a049;
+        }
+        .btn-danger:hover {
+            background-color: #c9302c;
+        }
+        .bg-light {
+            background-color: #f2f7f6 !important;
+        }
+        .card-footer {
+            background-color: #f1f1f1;
+            text-align: center;
+            font-size: 1rem;
+        }
+        .header-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/a/a1/Soccer_ball_icon.png');
+            background-size: cover;
+            display: inline-block;
+            margin-right: 10px;
+        }
+    </style>
+    <title>Oyuncu Ekle</title>
+</head>
+<body class="bg-light">
+<div class="container mt-5">
+    <div class="card shadow-lg">
+        <div class="card-header">
+            <span class="header-logo"></span>
+            <h2 th:text="${player.id != null} ? 'Oyuncu Düzenle' : 'Oyuncu Ekle'">Oyuncu Formu</h2>
+        </div>
+        <div class="card-body">
+            <form th:action="@{|/players/${player.id != null ? player.id : ''}|}" th:object="${player}" method="post">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Adı</label>
+                    <input type="text" id="name" th:field="*{name}" class="form-control" placeholder="Oyuncunun adı" required>
+                </div>
+                <div class="mb-3">
+                    <label for="species" class="form-label">Mevkisi</label>
+                    <input type="text" id="species" th:field="*{species}" class="form-control" placeholder="Oyuncunun Mevkisi" required>
+                </div>
+                <div class="mb-3">
+                    <label for="age" class="form-label">Yaşı</label>
+                    <input type="number" id="age" th:field="*{age}" class="form-control" placeholder="Oyuncunun Yaşı" required>
+                </div>
+                <div class="mb-3">
+                    <label for="country" class="form-label">Ülkesi</label>
+                    <input type="text" id="country" th:field="*{country}" class="form-control" placeholder="Oyuncunun Ülkesi" required>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn btn-success">Kaydet</button>
+                    <a href="/players" class="btn btn-danger">İptal</a>
+                </div>
+            </form>
+        </div>
+        <div class="card-footer">
+            <p>&copy; 2024 Futbol Kulübü | Oyuncu Yönetimi</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
